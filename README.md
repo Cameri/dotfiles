@@ -24,6 +24,7 @@ Dotfiles
 * xorg-xrandr (provides xrandr)
 * ranger (file manager)
 * [colorpicker](https://github.com/Jack12816/colorpicker)
+* dmenu
 * scrot (for screenshots)
 * acpilight (for brightness control)
 * nitrogen (for managing the desktop background)
@@ -93,3 +94,5 @@ The GPG Agent is required for Telegram (citation needed).
 * `# systemctl start apcupsd`
 * Edit scripts in `/etc/apcupsd` as needed
 
+### dmenu
+* `cd .config/awesome && ln -s $DOT_FILES/awesome/dmenu`
