@@ -103,6 +103,9 @@ export ARCHFLAGS="-arch x86_64"
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# screenshots
+export SCREENSHOTS_PATH="~/Pictures/screenshots"
+
 # Aliases
 alias nano="micro"
 alias ls="ls -hal --color"
