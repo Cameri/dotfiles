@@ -18,7 +18,7 @@ Dotfiles
 * ttf-ubuntu-font-family
 * tamsyn-font (provides terminal font)
 * sakura
-* openssh (provides ssh, ssh-add, ssh-agent, ssh-keygen, scp)
+* openssh (provides ssh, sshd, ssh-add, ssh-agent, ssh-keygen, scp)
 * zip
 * unzip
 * xorg-xrandr (provides xrandr)
@@ -51,6 +51,8 @@ Dotfiles
 * tmux
 * apcupsd (power management for APC's UPS units)
 * netcat (provides `nc`)
+* feh (image viewer)
+* imagemagick (extra image support for feh)
 
 ## Installation and configuration
 ### Networking
@@ -89,10 +91,23 @@ The GPG Agent is required for Telegram (citation needed).
 * Generate a new ssh key pair with `$ ssh-keygen`
 * Add to SSH agent with `$ ssh-add ~/.ssh/id_rsa`
 
+### SSH Server
+Enable this to allow incoming remote connections.
+* Edit `/etc/ssh/sshd_contig` and secure as needed.
+* `# systemctl enable sshd.service`
+* `# systemctl start sshd.service`
+
 ### APCUPSD
+* Edit scripts in `/etc/apcupsd` as needed
 * `# systemctl enable apcupsd`
 * `# systemctl start apcupsd`
-* Edit scripts in `/etc/apcupsd` as needed
+
 
 ### dmenu
 * `cd .config/awesome && ln -s $DOT_FILES/awesome/dmenu`
+
+### Keyboard (US Altgr-Intl)
+To enable it temporarily:
+* `$ localectl set-x11-keymap us "" altgr-intl`
+To make it permanent, add it to your session init script.
+
