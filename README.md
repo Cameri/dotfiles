@@ -113,3 +113,9 @@ Enable this to allow incoming remote connections.
 To enable it temporarily:
 * `$ localectl set-x11-keymap us "" altgr-intl`
 To make it permanent, add it to your session init script.
+
+### Ranger
+Create trash folder for `DD` hotkey and `:empty` console command
+* `mkdir ~/.Trash`
+Link ranger config files
+* `ln -s $DOTFILES/ranger $HOME/.config/`
