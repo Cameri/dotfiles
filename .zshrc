@@ -9,7 +9,7 @@ export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=""
+ZSH_THEME="spaceship"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,11 +58,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-
 source ~/.antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+# antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
@@ -78,23 +77,21 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
+# Autosuggestions
+antigen bundle zsh-users/zsh-autosuggestions
+
 # Tell Antigen that you're done.
 antigen apply
 
-autoload -U promptinit; promptinit
-prompt pure
+# Pure prompt (remove comments to enable)
+# autoload -U promptinit; promptinit
+# prompt pure
 
 # User configuration
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 export EDITOR='micro'
 
 # Compilation flags
@@ -110,3 +107,7 @@ export SCREENSHOTS_PATH="~/Pictures/screenshots"
 alias nano="micro"
 alias ls="ls -hal --color"
 alias netstat="ss"
+
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh

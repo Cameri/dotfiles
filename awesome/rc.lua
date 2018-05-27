@@ -68,7 +68,7 @@ local guieditor    = "code"
 local scrlocker    = "xlock"
 local filebrowser  = "ranger"
 local theme_path   = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
-local tagnames     = { "web", "term", "chat", "media", "files", "other"}
+local tagnames     = { "web", "term", "chat", "media", "files", "code"}
 -- }}}
 
 -- {{{ Autostart windowless processes
@@ -190,7 +190,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
         -- other triads can be put here
     }
 })
---menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
+--menubar.utils.terminal = terminal -- Set the Menubar terminal for that require it
 -- }}}
 
 -- {{{ Screen
@@ -489,7 +489,16 @@ local globalkeys = my_table.join(
     awful.key({ altkey }, "3", function () util.pick_color() end,
               {description = "pick color", group = "launcher"}),
     -- Ranger
-    awful.key({ altkey }, "r", function () awful.spawn.with_shell(terminal .. ' -e ' .. filebrowser) end),
+    awful.key({ altkey }, "r", function ()
+    	awful.spawn(terminal .. ' -e ' .. filebrowser, {
+    	tag = awful.util.tagnames[5]
+    }) end),
+    -- ncmpcpp
+    awful.key({ altkey }, "m", function ()
+      awful.spawn(terminal .. ' -e ncmpcpp', {
+      tag = awful.util.tagnames[4],
+      floating = true
+    }) end),
     -- Default
     --[[ Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -650,7 +659,18 @@ awful.rules.rules = {
       rule       = { class = "Firefox" },
       properties = { tag = awful.util.tagnames[1] }
     },
-
+	-- Set video & music apps to open in media
+    {
+      rule_any   = {
+      	class = "vlc",
+      },
+      properties = { tag = awful.util.tagnames[4] }
+    },
+    -- Set Firefox to always map on the first tag on screen 2.
+    {
+      rule_any   = { class = { "code", "Code" } },
+      properties = { tag = awful.util.tagnames[6] }
+    },
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
 }

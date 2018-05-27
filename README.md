@@ -7,6 +7,7 @@ Dotfiles
 * zsh
 * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 * [antigen](https://github.com/zsh-users/antigen)
+* fzf
 * xorg-server
 * xorg-setxkbmap
 * xorg-xclipboard
@@ -17,6 +18,7 @@ Dotfiles
 * pacaur
 * ttf-ubuntu-font-family
 * tamsyn-font (provides terminal font)
+* tamzen-font-git (provides TamzenForPowerline font, required by spaceship prompt)
 * sakura
 * openssh (provides ssh, sshd, ssh-add, ssh-agent, ssh-keygen, scp)
 * zip
@@ -26,33 +28,34 @@ Dotfiles
 * [colorpicker](https://github.com/Jack12816/colorpicker)
 * dmenu
 * scrot (for screenshots)
-* acpilight (for brightness control)
 * nitrogen (for managing the desktop background)
 * noto-fonts-emoji (provides emoji as SVG)
-* zenity (for dialogs)
+* gnome-screensaver
+* gdm
+* pasystray
 
-## Extra
-* playerctl (control music players through D-Bus)
+## Extra deps
 * paprefs (PulseAudio preferences)
 * pulseaudio-gconf
 * pulseaudio-alsa
 * pavucontrol
-* telegram-desktop-bin
-* peek (screen recording)
-* spotify
 * mopidy
 * mopidy-iris
 * mopidy-local-sqlite
 * mopidy-notifier-git
 * nvidia-settings
 * xclip
-* tixati
 * htop
 * tmux
 * apcupsd (power management for APC's UPS units)
-* netcat (provides `nc`)
 * feh (image viewer)
 * imagemagick (extra image support for feh)
+
+## Apps
+* tixati
+* telegram-desktop-bin
+* peek (screen recording)
+* spotify
 
 ## Installation and configuration
 ### Networking
