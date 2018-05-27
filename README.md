@@ -53,6 +53,7 @@ Dotfiles
 * netcat (provides `nc`)
 * feh (image viewer)
 * imagemagick (extra image support for feh)
+* ttf-iosevka-ss09 (programming font for VS Code)
 
 ## Installation and configuration
 ### Networking
@@ -102,12 +103,10 @@ Enable this to allow incoming remote connections.
 * `# systemctl enable apcupsd`
 * `# systemctl start apcupsd`
 
-
 ### dmenu
-* `cd .config/awesome && ln -s $DOT_FILES/awesome/dmenu`
+* TODO
 
 ### Keyboard (US Altgr-Intl)
 To enable it temporarily:
 * `$ localectl set-x11-keymap us "" altgr-intl`
 To make it permanent, add it to your session init script.
-
