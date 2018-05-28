@@ -1,0 +1,19 @@
+diff --git a/themes/steamburn/theme.lua b/themes/steamburn/theme.lua
+index 20073a9..f155425 100644
+--- a/themes/steamburn/theme.lua
++++ b/themes/steamburn/theme.lua
+@@ -148,10 +148,10 @@ local mem = lain.widget.mem({
+ })
+ 
+ -- /home fs
+-theme.fs = lain.widget.fs({
+-    partition = "/home",
+-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Misc Tamsyn 10.5" },
+-})
++--theme.fs = lain.widget.fs({
++--    partition = "/home",
++--    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Misc Tamsyn 10.5" },
++--})
+ 
+ -- Battery
+ local bat = lain.widget.bat({
