@@ -78,3 +78,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Hat tip to Ricardo Restituyo - [Warchiefx](https://github.com/Warchiefx)
+* Juan Arturo Cabral - [eZanto](https://github.com/eZanto)
