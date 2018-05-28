@@ -29,6 +29,10 @@ The GPG Agent is required for Telegram (citation needed).
 * `$ systemctl --user enable gpg-agent.service`
 * `$ systemctl --user start gpg-agent.service`
 
+## Tamsyn & Other bitmap fonts (Ubuntu only)
+* `# rm /etc/fonts/conf.d/70-no-bitmaps.conf`
+* `# ln /etc/fonts/conf.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/`
+
 ## PulseAudio
 * Install pulseaudio-alsa, paprefs, pasystray, 
 * `systemctl --user enable pulseaudio.service`
