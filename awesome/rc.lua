@@ -661,9 +661,7 @@ awful.rules.rules = {
     },
 	-- Set video & music apps to open in media
     {
-      rule_any   = {
-      	class = "vlc",
-      },
+      rule   = { class = "vlc" },
       properties = { tag = awful.util.tagnames[4] }
     },
     -- Set Firefox to always map on the first tag on screen 2.
