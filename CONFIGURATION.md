@@ -17,7 +17,7 @@ DHCP=yes
 
 * `$ gpg --list-keys`
 
-* `echo keyring /etc/pacman.d/gnupg/pubring.gpg > ~/.gnupg/gpg.conf`
+* `$ echo keyring /etc/pacman.d/gnupg/pubring.gpg > ~/.gnupg/gpg.conf`
 * Install cower from AUR (pacaur dependency)
 * Install pacaur from AUR
 
@@ -36,8 +36,8 @@ The GPG Agent is required for Telegram (citation needed).
 * `$ git submodule init`
 * `$ git submodule update --recursive`
 Disable fs widget in Steamburn (Ubuntu only):
-* `cp ~/.config/awesome/disable_fs_widget.patch ~/.config/awesome/themes/`
-* `cd ~/.config/awesome/themes`
+* `$ cp ~/.config/awesome/disable_fs_widget.patch ~/.config/awesome/themes/`
+* `$ cd ~/.config/awesome/themes`
 * `$ git apply disable_fs_widget.patch`
 Note: Ubuntu 16.04.4 LTS does not support Lain's fs widget. This widget must be disabled in each theme used.
 
@@ -47,12 +47,12 @@ Note: Ubuntu 16.04.4 LTS does not support Lain's fs widget. This widget must be 
 
 ## PulseAudio
 * Install pulseaudio-alsa, paprefs, pasystray, 
-* `systemctl --user enable pulseaudio.service`
-* `systemctl --user start pulseaudio.service`
+* `$ systemctl --user enable pulseaudio.service`
+* `$ systemctl --user start pulseaudio.service`
 
 ## SSH Agent
-* `systemctl --user enable ssh-agent.service`
-* `systemctl --user start ssh-agent.service`
+* `$ systemctl --user enable ssh-agent.service`
+* `$ systemctl --user start ssh-agent.service`
 * Generate a new ssh key pair with `$ ssh-keygen`
 * Add to SSH agent with `$ ssh-add ~/.ssh/id_rsa`
 
@@ -77,6 +77,24 @@ To make it permanent, add it to your session init script.
 
 ## Ranger
 Create trash folder for `DD` hotkey and `:empty` console command
-* `mkdir ~/.Trash`
+* `$ mkdir ~/.Trash`
 Link ranger config files
-* `ln -s $DOTFILES/ranger $HOME/.config/`
+* `$ ln -s $DOTFILES/ranger $HOME/.config/`
+
+## Wine
+* [Enable](https://wiki.archlinux.org/index.php/Multilib) the multilib repository
+* Update repository cache:
+  * `# pacman -Syy`
+* Install wine, winetricks wine_gecko, wine-mono
+  * `# pacman -S wine winetricks wine_gecko wine-mono`
+* Install extra dependencies:
+  * `# pacman -S lib32-nvidia-utils lib32-pulse lib32-alsa lib32-alsa-plugins lib32-openal lib-mpg123 lib32-giflib lib32-libpng lib32-gnutls`
+* Create wine prefixes:
+  * 32-bit: `$ env WINEARCH=win32 WINEPREFIX=~/.win32 wineboot -u`
+  * 64-bit: `$ env WINEPREFIX=~/.win64 wineboot -u`
+* Run winetricks for each prefix and install:
+  * corefonts
+  * d3dx9
+  * _TBD_
+
+Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
