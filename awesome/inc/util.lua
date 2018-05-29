@@ -46,6 +46,22 @@ local function pick_color()
 	awful.spawn.with_shell("colorpicker --short --one-shot | xsel -b")
 end
 
+local function lock_screen()
+	awful.spawn("gnome-screensaver-command -l")
+end
+
+local function log_off()
+
+end
+
+local function reboot()
+
+end
+
+local function poweroff()
+
+end
+
 -- Exports
 local API = {
 	alert = alert,
@@ -54,5 +70,9 @@ local API = {
 	capture_window = capture_window,
 	pick_color = pick_color,
 	run_once = run_once,
+	lock_screen = lock_screen,
+	log_off,
+	reboot = reboot,
+	poweroff = poweroff
 }
 return API
