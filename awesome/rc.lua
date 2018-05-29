@@ -5,7 +5,7 @@
 --]]
 
 -- {{{ Required libraries
-local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
+local awesome, client, mouse, screen, tag, root = awesome, client, mouse, screen, tag, root
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
 local gears         = require("gears")
@@ -74,8 +74,10 @@ local tagnames     = { "web", "term", "chat", "media", "files", "code"}
 -- {{{ Autostart windowless processes
 util.run_once({
 	"localectl set-x11-keymap us \"\" altgr-intl",
---	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
---	"pasystray -a",
+	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
+	"pasystray -a",
+	"ssh -R 8008:localhost:80 -R 2002:localhost:22 -L 3306:localhost:3306 camerisolutions.com -Nf",
+	"gnome-screensaver"
 })
 -- }}}
 
@@ -152,7 +154,7 @@ awful.util.tasklist_buttons = my_table.join(
                                           end),
                      awful.button({ }, 3, function()
                          local instance = nil
- 
+
                          return function ()
                              if instance and instance.wibox.visible then
                                  instance:hide()
@@ -168,7 +170,7 @@ awful.util.tasklist_buttons = my_table.join(
                      awful.button({ }, 5, function ()
                                               awful.client.focus.byidx(-1)
                                           end))
- 
+
 beautiful.init(theme_path)
 
 -- {{{ Menu
@@ -222,6 +224,9 @@ root.buttons(my_table.join(
 
 -- {{{ Key bindings
 local globalkeys = my_table.join(
+    -- Lock screen
+    awful.key({ modkey }, "l", function () util.lock_screen() end,
+              {description = "lock screen", group = "hotkeys"}),
     -- Take a screenshot
     awful.key({ }, "Print", function () util.capture_fullscreen() end,
               {description = "capture entire screen", group = "hotkeys"}),
@@ -490,14 +495,24 @@ local globalkeys = my_table.join(
               {description = "pick color", group = "launcher"}),
     -- Ranger
     awful.key({ altkey }, "r", function ()
-    	awful.spawn(terminal .. ' -e ' .. filebrowser, {
-    	tag = awful.util.tagnames[5]
+        awful.spawn(terminal .. ' -e ' .. filebrowser, {
+        tag = awful.util.tagnames[5]
     }) end),
     -- ncmpcpp
     awful.key({ altkey }, "m", function ()
       awful.spawn(terminal .. ' -e ncmpcpp', {
       tag = awful.util.tagnames[4],
       floating = true
+    }) end),
+    -- Sakura
+    awful.key({ altkey }, "t", function ()
+        awful.spawn(terminal, {
+        tag = awful.util.tagnames[2]
+    }) end),
+    -- Firefox
+    awful.key({ altkey }, "f", function ()
+        awful.spawn(terminal, {
+        tag = awful.util.tagnames[1]
     }) end),
     -- Default
     --[[ Menubar

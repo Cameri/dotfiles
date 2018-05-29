@@ -29,6 +29,18 @@ The GPG Agent is required for Telegram (citation needed).
 * `$ systemctl --user enable gpg-agent.service`
 * `$ systemctl --user start gpg-agent.service`
 
+## Awesome WM
+* `$ rm -rf ~/.config/awesome`
+* `$ ln -s $DOTFILES/awesome ~/.config/awesome`
+* `$ cd ~/.config/awesome`
+* `$ git submodule init`
+* `$ git submodule update --recursive`
+Disable fs widget in Steamburn (Ubuntu only):
+* `cp ~/.config/awesome/disable_fs_widget.patch ~/.config/awesome/themes/`
+* `cd ~/.config/awesome/themes`
+* `$ git apply disable_fs_widget.patch`
+Note: Ubuntu 16.04.4 LTS does not support Lain's fs widget. This widget must be disabled in each theme used.
+
 ## Tamsyn & Other bitmap fonts (Ubuntu only)
 * `# rm /etc/fonts/conf.d/70-no-bitmaps.conf`
 * `# ln /etc/fonts/conf.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/`
@@ -46,7 +58,7 @@ The GPG Agent is required for Telegram (citation needed).
 
 ## SSH Server
 Enable this to allow incoming remote connections.
-* Edit `/etc/ssh/sshd_contig` and secure as needed.
+* Edit `/etc/ssh/sshd_config` and secure as needed.
 * `# systemctl enable sshd.service`
 * `# systemctl start sshd.service`
 

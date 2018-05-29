@@ -10,10 +10,11 @@ Dotfiles
 * fzf
 * xorg-server
 * xorg-setxkbmap
-* xorg-xclipboard
+* xclip
 * xorg-xev
-* xsel
-* nvidia
+* xsel (copying to clipboard)
+* xclip (clipboard support)
+* nvidia (gfx drivers)
 * awesome
 * pacaur
 * ttf-ubuntu-font-family
@@ -23,11 +24,11 @@ Dotfiles
 * openssh (provides ssh, sshd, ssh-add, ssh-agent, ssh-keygen, scp)
 * zip
 * unzip
+* unrar
 * xorg-xrandr (provides xrandr)
 * ranger (file manager)
 * [colorpicker](https://github.com/Jack12816/colorpicker)
-* dmenu
-* scrot (for screenshots)
+* [escrotum-git](https://aur.archlinux.org/packages/escrotum-git/) (for screenshots)
 * nitrogen (for managing the desktop background)
 * noto-fonts-emoji (provides emoji as SVG)
 * gnome-screensaver
@@ -36,27 +37,32 @@ Dotfiles
 
 ## Extra deps
 * paprefs (PulseAudio preferences)
-* pulseaudio-gconf
 * pulseaudio-alsa
 * pavucontrol
-* mopidy
-* mopidy-iris
-* mopidy-local-sqlite
-* mopidy-notifier-git
 * nvidia-settings
 * xclip
-* htop
-* tmux
-* apcupsd (power management for APC's UPS units)
 * feh (image viewer)
 * imagemagick (extra image support for feh)
 * ttf-iosevka-ss09 (programming font for VS Code)
+* [awmtt](https://aur.archlinux.org/packages/awmtt/)
+
+## Tools
+* tmux
+* htop
 
 ## Apps
 * tixati
 * telegram-desktop-bin
 * peek (screen recording)
 * spotify
+
+## Services
+* apcupsd (power management for APC's UPS units)
+* mopidy
+* mopidy-iris
+* mopidy-local-sqlite
+* mopidy-notifier-git
+* mopidy-spotify
 
 ## Installation
 See [INSTALLATION.md](INSTALLATION.md)
