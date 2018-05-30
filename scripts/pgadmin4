@@ -1,0 +1,2 @@
+#/bin/sh
+docker run --rm -p 5050:5050 -v pgadmin:/pgadmin thajeztah/pgadmin4
