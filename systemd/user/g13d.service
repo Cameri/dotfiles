@@ -3,7 +3,6 @@ Description=G13 Advanced Gameboard
 
 [Service]
 Type=simple
-# Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 ExecStart=/opt/g13/bin/g13d --config %h/.config/g13/bindings/ro.bind
 
 [Install]
