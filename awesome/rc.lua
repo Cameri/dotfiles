@@ -73,6 +73,7 @@ local tagnames     = { "web", "term", "chat", "media", "files", "code"}
 
 -- {{{ Autostart windowless processes
 util.run_once({
+	"compton -C",
 	"localectl set-x11-keymap us \"\" altgr-intl",
 	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
 	"pasystray -a",
