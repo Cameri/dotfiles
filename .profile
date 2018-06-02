@@ -1,0 +1,1 @@
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.gem/ruby/2.5.0/bin:$PATH
