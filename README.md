@@ -22,9 +22,7 @@ Dotfiles
 * tamzen-font-git (provides TamzenForPowerline font, required by spaceship prompt)
 * sakura
 * openssh (provides ssh, sshd, ssh-add, ssh-agent, ssh-keygen, scp)
-* zip
-* unzip
-* unrar
+* zip (unzip, unrar)
 * xorg-xrandr (provides xrandr)
 * ranger (file manager)
 * [colorpicker](https://github.com/Jack12816/colorpicker)
@@ -32,7 +30,7 @@ Dotfiles
 * nitrogen (for managing the desktop background)
 * noto-fonts-emoji (provides emoji as SVG)
 * gnome-screensaver
-* gdm
+* gdm (desktop manager / login)
 * pasystray
 
 ## Extra deps
@@ -40,7 +38,6 @@ Dotfiles
 * pulseaudio-alsa
 * pavucontrol
 * nvidia-settings
-* xclip
 * feh (image viewer)
 * imagemagick (extra image support for feh)
 * ttf-iosevka-ss09 (programming font for VS Code)
@@ -55,6 +52,7 @@ Dotfiles
 * telegram-desktop-bin
 * peek (screen recording)
 * spotify
+* vlc (protobuf & libmicrodns for Chromecast support)
 
 ## Services
 * apcupsd (power management for APC's UPS units)
