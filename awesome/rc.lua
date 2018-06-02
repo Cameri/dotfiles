@@ -676,12 +676,12 @@ awful.rules.rules = {
     },
 	-- Set video & music apps to open in media
     {
-      rule   = { class = "vlc" },
+      rule_any   = { class = { "vlc", "spotify" } },
       properties = { tag = awful.util.tagnames[4] }
     },
     -- Set Firefox to always map on the first tag on screen 2.
     {
-      rule_any   = { class = { "code", "Code" } },
+      rule_any   = { class = { "code", "Code", "jetbrains-pycharm-ce", "gitkraken" } },
       properties = { tag = awful.util.tagnames[6] }
     },
     { rule = { class = "Gimp", role = "gimp-image-window" },
