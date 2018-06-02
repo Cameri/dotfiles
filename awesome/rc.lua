@@ -77,7 +77,7 @@ util.run_once({
 	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
 	"pasystray -a",
 	"ssh -R 8008:localhost:80 -R 2002:localhost:22 -L 3306:localhost:3306 camerisolutions.com -Nf",
-	"gnome-screensaver"
+	"gnome-screensaver",
 })
 -- }}}
 
