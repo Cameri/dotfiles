@@ -1,9 +1,0 @@
-[Unit]
-Description=G13 Advanced Gameboard
-
-[Service]
-Type=simple
-ExecStart=/opt/g13/bin/g13d --config %h/.config/g13/bindings/ro.bind
-
-[Install]
-WantedBy=default.target
