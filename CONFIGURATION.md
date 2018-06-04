@@ -80,3 +80,7 @@ Create trash folder for `DD` hotkey and `:empty` console command
 * `$ mkdir ~/.Trash`
 Link ranger config files
 * `$ ln -s $DOTFILES/ranger $HOME/.config/`
+
+## VS Code
+Fix max user watches warning for big projects:
+* `$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
