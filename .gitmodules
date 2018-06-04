@@ -10,6 +10,3 @@
 [submodule "awesome/sharedtags"]
 	path = awesome/sharedtags
 	url = https://github.com/Drauthius/awesome-sharedtags.git
-[submodule "awesome-copycats"]
-	path = awesome-copycats
-	url = https://github.com/lcpz/awesome-copycats.git
