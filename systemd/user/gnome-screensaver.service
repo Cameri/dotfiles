@@ -1,0 +1,9 @@
+[Unit]
+Description=Gnome Screensaver
+After=dbus.service
+
+[Service]
+ExecStart=/usr/bin/gnome-screensaver
+
+[Install]
+WantedBy=default.target
