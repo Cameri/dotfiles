@@ -16,7 +16,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.zenburn_dir                               = require("awful.util").get_themes_dir() .. "zenburn"
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/steamburn"
-theme.wallpaper                                 = theme.dir .. "/wall.png"
+-- theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "Misc Tamsyn 10.5"
 theme.fg_normal                                 = "#e2ccb0"
 theme.fg_focus                                  = "#d88166"
@@ -37,6 +37,19 @@ theme.menu_height                               = 16
 theme.menu_width                                = 140
 theme.awesome_icon                              = theme.dir .."/icons/awesome.png"
 theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.png"
+theme.widget_temp                               = theme.dir .. "/icons/temp.png"
+theme.widget_uptime                             = theme.dir .. "/icons/ac.png"
+theme.widget_cpu                                = theme.dir .. "/icons/cpu.png"
+theme.widget_weather                            = theme.dir .. "/icons/dish.png"
+theme.widget_fs                                 = theme.dir .. "/icons/fs.png"
+theme.widget_mem                                = theme.dir .. "/icons/mem.png"
+theme.widget_note                               = theme.dir .. "/icons/note.png"
+theme.widget_note_on                            = theme.dir .. "/icons/note_on.png"
+theme.widget_netdown                            = theme.dir .. "/icons/net_down.png"
+theme.widget_netup                              = theme.dir .. "/icons/net_up.png"
+theme.widget_batt                               = theme.dir .. "/icons/bat.png"
+theme.widget_clock                              = theme.dir .. "/icons/clock.png"
+theme.widget_vol                                = theme.dir .. "/icons/spkr.png"
 theme.layout_txt_tile                           = "[t]"
 theme.layout_txt_tileleft                       = "[l]"
 theme.layout_txt_tilebottom                     = "[b]"
@@ -81,7 +94,8 @@ local markup = lain.util.markup
 local gray   = "#94928F"
 
 -- Textclock
-local mytextclock = wibox.widget.textclock(" %H:%M ")
+local clockicon = wibox.widget.imagebox(theme.widget_clock)
+local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%A %d %B ") .. markup("#d88166", ">") .. " %H:%M ")
 mytextclock.font = theme.font
 
 -- Calendar
@@ -116,6 +130,7 @@ local mail = lain.widget.imap({
 --]]
 
 -- MPD
+local mpdicon = wibox.widget.imagebox()
 theme.mpd = lain.widget.mpd({
     settings = function()
         artist = mpd_now.artist .. " "
@@ -134,62 +149,84 @@ theme.mpd = lain.widget.mpd({
 })
 
 -- CPU
+local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
 local cpu = lain.widget.sysload({
     settings = function()
-        widget:set_markup(markup.font(theme.font, markup(gray, " Cpu ") .. load_1 .. " "))
+        widget:set_markup(markup.font(theme.font, load_1))
     end
 })
 
 -- MEM
+local memicon = wibox.widget.imagebox(theme.widget_mem)
 local mem = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.font(theme.font, markup(gray, " Mem ") .. mem_now.used .. " "))
+        widget:set_markup(markup.font(theme.font, mem_now.used .. "M"))
     end
 })
 
 -- /home fs
-theme.fs = lain.widget.fs({
-    partition = "/home",
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Misc Tamsyn 10.5" },
-})
+-- local fsicon = wibox.widget.imagebox(theme.widget_fs)
+-- theme.fs = lain.widget.fs({
+--     partition = "/home",
+--     notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Misc Tamsyn 10.5" },
+-- })
 
 -- Battery
+local baticon = wibox.widget.imagebox(theme.widget_batt)
 local bat = lain.widget.bat({
     settings = function()
-        local perc = bat_now.perc
-        if bat_now.ac_status == 1 then perc = "Plug" end
-        widget:set_markup(markup.font(theme.font, markup(gray, " Bat ") .. perc .. " "))
+        local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
+        if bat_now.ac_status == 1 then
+            perc = perc .. " plug"
+        end
+        widget:set_markup(markup.font(theme.font, perc .. " "))
     end
 })
 
 -- Net checker
-local net = lain.widget.net({
+local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
+local netdowninfo = wibox.widget.textbox()
+local netupicon = wibox.widget.imagebox(theme.widget_netup)
+local netupinfo = lain.widget.net({
     settings = function()
-        if net_now.state == "up" then net_state = "On"
-        else net_state = "Off" end
-        widget:set_markup(markup.font(theme.font, markup(gray, " Net ") .. net_state .. " "))
+        -- if net_now.state == "up" then net_state = "On"
+        -- else net_state = "Off" end
+
+        -- widget:set_markup(markup.font(theme.font, markup(gray, " Net ") .. net_state .. " "))
+        widget:set_markup(markup.font(theme.font, net_now.sent .. " "))
+        netdowninfo:set_markup(markup.font(theme.font, net_now.received .. " "))
     end
 })
 
 -- ALSA volume
+local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.alsa({
     settings = function()
-        header = " Vol "
         vlevel  = volume_now.level
 
         if volume_now.status == "off" then
             vlevel = vlevel .. "M "
         else
-            vlevel = vlevel .. " "
+            vlevel = vlevel .. "% "
         end
 
-        widget:set_markup(markup.font(theme.font, markup(gray, header) .. vlevel))
+        widget:set_markup(markup.font(theme.font, vlevel))
     end
 })
 
 -- Weather
+local weathericon = wibox.widget.imagebox(theme.widget_weather)
 theme.weather = lain.widget.weather({
-    city_id = 2643743, -- placeholder (London)
+    city_id = os.getenv("WEATHER_CITY_ID") or 3492908, -- Santo Domingo
+})
+
+-- CPU Temp
+local tempicon = wibox.widget.imagebox(theme.widget_temp)
+local temp = lain.widget.temp({
+    tempfile = os.getenv("CORETEMP_WIDGET_TEMPFILE") or "/sys/class/thermal/thermal_zone0/temp",
+    settings = function()
+        widget:set_markup(markup.font(theme.font, coretemp_now .. "°C "))
+    end
 })
 
 -- Separators
@@ -219,6 +256,9 @@ function theme.at_screen_connect(s)
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
 
+    -- Confirmation prompt
+    s.mypromptbox_conf = awful.widget.prompt()
+
     -- Textual layoutbox
     s.mytxtlayoutbox = wibox.widget.textbox(theme["layout_txt_" .. awful.layout.getname(awful.layout.get(s))])
     awful.tag.attached_connect_signal(s, "property::selected", function () update_txt_layoutbox(s) end)
@@ -236,12 +276,14 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 20 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+
+            s.mypromptbox_conf,
             layout = wibox.layout.fixed.horizontal,
             first,
             s.mytaglist,
@@ -254,16 +296,28 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
             spr,
             theme.mpd.widget,
             --mail.widget,
+            netdownicon,
+            netdowninfo,
+            netupicon,
+            netupinfo,
+            cpuicon,
             cpu.widget,
+            tempicon,
+            temp,
+            memicon,
             mem.widget,
-            bat.widget,
-            net.widget,
+            -- fsicon,
+            -- theme.fs.widget,
+            -- baticon,
+            -- bat.widget,
+            volicon,
             theme.volume.widget,
-            mytextclock
+            wibox.widget.systray(),
+            clockicon,
+            mytextclock,
         },
     }
 end
