@@ -30,3 +30,8 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
   * `$ gpg --recv-keys --keyserver hkp://pgp.mit.edu 0FC3042E345AD05D`
 * Install `discord` from AUR
   * `$ pacaur -S discord`
+
+## G13 Advanced Gameboard
+* `$ git clone git@github.com:JoelRSimpson/g13.git`
+* `$ cd g13 && make`
+* `# cp ../g13 /opt -r`
