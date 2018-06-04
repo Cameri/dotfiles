@@ -34,6 +34,7 @@ Dotfiles
 * pasystray
 
 ## Extra deps
+* xorg-server-xephyr (for testing Awesome configs)
 * paprefs (PulseAudio preferences)
 * pulseaudio-alsa
 * pavucontrol
