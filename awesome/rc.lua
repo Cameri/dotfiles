@@ -76,8 +76,8 @@ util.run_once({
 	"compton -C",
 	"localectl set-x11-keymap us \"\" altgr-intl",
 	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
-	"pasystray -a",
-	-- "ssh -R 8008:localhost:80 -R 2002:localhost:22 -L 3306:localhost:3306 camerisolutions.com -Nf"
+	"pasystray -a || pasystray",
+	"nm-applet"
 })
 -- }}}
 
@@ -220,7 +220,7 @@ screen.connect_signal("property::geometry", function(s)
     --    if type(wallpaper) == "function" then
     --        wallpaper = wallpaper(s)
     --    end
-    --    gears.wallpaper.maximized(wallpaper, s, true)      
+    --    gears.wallpaper.maximized(wallpaper, s, true)
     --end
     awful.spawn("nitrogen --restore")
 end)
@@ -526,7 +526,7 @@ local globalkeys = my_table.join(
     }) end),
     -- Firefox
     awful.key({ altkey }, "f", function ()
-        awful.spawn(terminal, {
+        awful.spawn(termi, {
         tag = awful.util.tagnames[1]
     }) end),
     -- Default
@@ -557,7 +557,7 @@ local globalkeys = my_table.join(
               {description = "lua execute prompt", group = "awesome"})
     --]]
 )
- 
+
 clientkeys = my_table.join(
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
               {description = "magnify client", group = "client"}),
@@ -649,16 +649,16 @@ for i = 1, 9 do
                   descr_toggle_focus)
     )
 end
- 
+
 clientbuttons = my_table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
- 
+
 -- Set keys
 root.keys(globalkeys)
 -- }}}
- 
+
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -675,7 +675,7 @@ awful.rules.rules = {
                      size_hints_honor = false
      }
     },
- 
+
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = true} },
@@ -694,23 +694,23 @@ awful.rules.rules = {
       rule_any   = { class = { "vlc", "spotify" } },
       properties = { tag = awful.util.tagnames[4] }
     },
-    -- Set Firefox to always map on the first tag on screen 2.
+    -- GitKraken
     {
-      rule_any   = { class = { "code", "Code", "jetbrains-pycharm-ce", "gitkraken" } },
+      rule_any   = { class = { "code", "code - insiders", "jetbrains-pycharm-ce", "gitkraken" } },
       properties = { tag = awful.util.tagnames[6] }
     },
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
 }
 -- }}}
- 
+
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
- 
+
     if awesome.startup and
       not c.size_hints.user_position
       and not c.size_hints.program_position then
@@ -718,7 +718,7 @@ client.connect_signal("manage", function (c)
         awful.placement.no_offscreen(c)
     end
 end)
- 
+
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- Custom
@@ -726,7 +726,7 @@ client.connect_signal("request::titlebars", function(c)
         beautiful.titlebar_fun(c)
         return
     end
- 
+
     -- Default
     -- buttons for the titlebar
     local buttons = my_table.join(
@@ -741,7 +741,7 @@ client.connect_signal("request::titlebars", function(c)
             awful.mouse.client.resize(c)
         end)
     )
- 
+
     awful.titlebar(c, {size = 16}) : setup {
         { -- Left
             -- awful.titlebar.widget.iconwidget(c),
@@ -767,7 +767,7 @@ client.connect_signal("request::titlebars", function(c)
         layout = wibox.layout.align.horizontal
     }
 end)
- 
+
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
     if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
@@ -775,7 +775,7 @@ client.connect_signal("mouse::enter", function(c)
         client.focus = c
     end
 end)
- 
+
 -- No border for maximized clients
 function border_adjust(c)
     if c.maximized then -- no borders if only 1 client visible
@@ -785,7 +785,7 @@ function border_adjust(c)
         c.border_color = beautiful.border_focus
     end
 end
- 
+
 client.connect_signal("focus", border_adjust)
 client.connect_signal("property::maximized", border_adjust)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

@@ -1,3 +1,7 @@
+export ZSH=/home/rcabral/.oh-my-zsh
+#autoload -U compinit && compinit
+#source $ZSH/oh-my-zsh.sh
+
 source ~/.antigen/antigen.zsh
 source ~/.antigenrc
 fpath+=('/home/rcabral/.nvm/versions/node/v8.9.4/lib/node_modules/pure-prompt/functions')
@@ -5,16 +9,16 @@ fpath+=('/home/rcabral/.nvm/versions/node/v8.9.4/lib/node_modules/pure-prompt/fu
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.yarn/bin:$PATH:$HOME/.bin
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/rcabral/.oh-my-zsh
+
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="bira"
-ZSH_THEME=""
+#ZSH_THEME=""
 # Command completion
-#autoload -U promptinit; promptinit
-#prompt pure
+autoload -U promptinit; promptinit
+prompt pure
 
 # Autocompletion with arrows
 zstyle ':completion:*' menu select
@@ -79,11 +83,10 @@ setopt HIST_BEEP # Beep when accessing nonexistent history.
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git git-extras vagrant npm yarn docker docker-compose aws zsh-completions pip systemd postgresql zsh-syntax-highlighting)
 plugins=()
-autoload -U compinit && compinit
-source $ZSH/oh-my-zsh.sh
 
-autoload -U promptinit; promptinit
-prompt pure
+
+#autoload -U promptinit; promptinit
+#prompt pure
 
 
 # User configuration
@@ -162,8 +165,6 @@ alias cxpx-qa-core-service="convox resources proxy qa-core-service --listen 6030
  
 alias cxpx-live-core-messaging="convox resources proxy live-core-messaging --listen 60901 &"
 alias cxpx-live-seo-rankings="convox resources proxy live-seo-rankings --listen 60902 &"
-
-alias _portainer="docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer &"
 
 export PYR_STAGE=rcabral
 export NVM_DIR="$HOME/.nvm"
