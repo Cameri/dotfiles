@@ -65,10 +65,9 @@ local terminal     = "sakura"
 local editor       = os.getenv("EDITOR") or "micro"
 local browser      = "firefox"
 local guieditor    = "code"
-local scrlocker    = "xlock"
 local filebrowser  = "ranger"
 local theme_path   = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
-local tagnames     = { "web", "term", "chat", "media", "files", "code"}
+local tagnames     = { "web", "term", "chat", "media", "files", "code", "games" }
 -- }}}
 
 -- {{{ Autostart windowless processes
@@ -78,8 +77,7 @@ util.run_once({
 	"localectl set-x11-keymap us \"\" altgr-intl",
 	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
 	"pasystray -a",
-	"ssh -R 8008:localhost:80 -R 2002:localhost:22 -L 3306:localhost:3306 camerisolutions.com -Nf",
-	"gnome-screensaver",
+	-- "ssh -R 8008:localhost:80 -R 2002:localhost:22 -L 3306:localhost:3306 camerisolutions.com -Nf"
 })
 -- }}}
 
@@ -180,9 +178,21 @@ local myawesomemenu = {
     { "hotkeys", function() return false, hotkeys_popup.show_help end },
     { "manual", terminal .. " -e man awesome" },
     { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-    { "restart", awesome.restart },
-    { "quit", function() awesome.quit() end }
+    { "restart awesome", awesome.restart },
+    { "quit awesome", function() awesome.quit() end }
 }
+
+local session = {
+    { "lock screen", function() util.lock_screen() end },
+    { "poweroff", function() util.poweroff() end },
+    { "reboot", function() util.reboot() end }
+}
+
+local g13bindings = {
+    { "Ragnarok Online", function () util.g13_load_config("ro") end },
+    { "Default", function () util.g13_load_config("default") end }
+}
+
 awful.util.mymainmenu = freedesktop.menu.build({
     icon_size = beautiful.menu_height or 16,
     before = {
@@ -190,6 +200,9 @@ awful.util.mymainmenu = freedesktop.menu.build({
         -- other triads can be put here
     },
     after = {
+        -- Remve next line if G13 Advanced Gameboard is unavailable
+        { "G13 Bindings", g13bindings },
+        { "Session", session },
         { "Open terminal", terminal },
         -- other triads can be put here
     }
@@ -240,8 +253,8 @@ local globalkeys = my_table.join(
               {description = "capture active window", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
-              {description = "lock screen", group = "hotkeys"}),
+    -- awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
+    --           {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -303,9 +316,9 @@ local globalkeys = my_table.join(
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
-    awful.key({ modkey }, "l", function () awful.tag.incmwfact(0.05) end,
+    awful.key({ modkey }, "]", function () awful.tag.incmwfact(0.05) end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey }, "h", function () awful.tag.incmwfact(-0.05) end,
+    awful.key({ modkey }, "[", function () awful.tag.incmwfact(-0.05) end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
@@ -488,7 +501,7 @@ local globalkeys = my_table.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
+    awful.key({ modkey }, "w", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
     awful.key({ modkey }, "a", function () awful.spawn(guieditor) end,
               {description = "run gui editor", group = "launcher"}),
