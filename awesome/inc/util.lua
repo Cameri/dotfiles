@@ -1,15 +1,45 @@
 -- Imports
-local awful         = require("awful")
-local naughty		= require("naughty")
+local awful = require("awful")
+local naughty = require("naughty")
+local beautiful = require("beautiful")
 
 -- Private constants
 
 
 -- Private functions
+local function confirm_action(name, func)
+	-- awful.screen.focused().mywibox:set_bg(beautiful.bg_urgent)
+	-- awful.screen.focused().mywibox:set_fg(beautiful.fg_urgent)
+	awful.prompt.run {
+				prompt = name .. " [y/N] ",
+				textbox = awful.screen.focused().mypromptbox_conf.widget,
+				exe_callback = function (t)
+					 if string.lower(t) == 'y' then
+							func()
+					 end
+				end,
+				history_path = nil,
+				done_callback = function ()
+					--  awful.screen.focused().mywibox:set_bg(
+					-- 		beautiful.screen_highlight_bg_active)
+					--  awful.screen.focused().mywibox:set_fg(
+					-- 		beautiful.screen_highlight_fg_active)
+				end
+	}
+end
+
 local function alert(text)
 	naughty.notify({
 		text = text,
 		position = "top_middle",
+		timeout = 3
+	})
+end
+
+local function notify(text)
+	naughty.notify({
+		text = text,
+		position = "top_right",
 		timeout = 3
 	})
 end
@@ -50,16 +80,21 @@ local function lock_screen()
 	awful.spawn("gnome-screensaver-command -l")
 end
 
-local function log_off()
-
+local function g13_load_config(binding)
+	awful.spawn.with_shell("cat $HOME/.config/g13/bindings/" .. binding .. ".bind > /tmp/g13d-in")
+	notify("Key bindings " .. binding .. " loaded in G13 Advanced Gameboard")
 end
 
 local function reboot()
-
+	confirm_action("Reboot?", function ()
+		awful.spawn("reboot")
+	end)
 end
 
 local function poweroff()
-
+	confirm_action("Power off?", function ()
+		awful.spawn("poweroff")
+	end)
 end
 
 -- Exports
@@ -69,6 +104,7 @@ local API = {
 	capture_region = capture_region,
 	capture_window = capture_window,
 	pick_color = pick_color,
+	g13_load_config = g13_load_config,
 	run_once = run_once,
 	lock_screen = lock_screen,
 	log_off,
