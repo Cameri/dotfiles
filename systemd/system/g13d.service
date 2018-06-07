@@ -7,4 +7,4 @@ ExecStartPre=/bin/chmod o+rw /dev/uinput
 ExecStart=/opt/g13/bin/g13d --config /home/cameri/.config/g13/bindings/ro.bind --pipe_in /tmp/g13d-in --pipe_out /tmp/g13d-out
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
