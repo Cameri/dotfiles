@@ -67,12 +67,11 @@ local browser      = "firefox"
 local guieditor    = "code"
 local filebrowser  = "ranger"
 local theme_path   = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
-local tagnames     = { "web", "term", "chat", "media", "files", "code", "games" }
+local tagnames     = { "web", "term", "chat", "media", "code", "games" }
 -- }}}
 
 -- {{{ Autostart windowless processes
 util.run_once({
-	"ncmpcpp",
 	"compton -C",
 	"localectl set-x11-keymap us \"\" altgr-intl",
 	"nitrogen --random --set-zoom-fill --save ~/Pictures/wallpapers",
@@ -512,22 +511,6 @@ local globalkeys = my_table.join(
     awful.key({ altkey }, "r", function ()
         awful.spawn(terminal .. ' -e ' .. filebrowser, {
         tag = awful.util.tagnames[5]
-    }) end),
-    -- ncmpcpp
-    awful.key({ altkey }, "m", function ()
-      awful.spawn(terminal .. ' -e ncmpcpp', {
-      tag = awful.util.tagnames[4],
-      floating = true
-    }) end),
-    -- Sakura
-    awful.key({ altkey }, "t", function ()
-        awful.spawn(terminal, {
-        tag = awful.util.tagnames[2]
-    }) end),
-    -- Firefox
-    awful.key({ altkey }, "f", function ()
-        awful.spawn(termi, {
-        tag = awful.util.tagnames[1]
     }) end),
     -- Default
     --[[ Menubar
