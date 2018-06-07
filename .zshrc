@@ -71,6 +71,7 @@ antigen bundle colors
 antigen bundle docker-compose
 antigen bundle fzf
 antigen bundle command-not-found
+antigen bundle wd
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
