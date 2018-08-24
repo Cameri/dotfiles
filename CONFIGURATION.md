@@ -56,6 +56,12 @@ Note: Ubuntu 16.04.4 LTS does not support Lain's fs widget. This widget must be 
 * Generate a new ssh key pair with `$ ssh-keygen`
 * Add to SSH agent with `$ ssh-add ~/.ssh/id_rsa`
 
+## Git
+* Make `micro` the default editor for Git:
+* `$ git config --global core.editor "micro"`
+* Improve git log:
+* `git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"`
+
 ## SSH Server
 Enable this to allow incoming remote connections.
 * Edit `/etc/ssh/sshd_config` and secure as needed.
@@ -66,9 +72,6 @@ Enable this to allow incoming remote connections.
 * Edit scripts in `/etc/apcupsd` as needed
 * `# systemctl enable apcupsd`
 * `# systemctl start apcupsd`
-
-## dmenu
-* TODO
 
 ## Keyboard (US Altgr-Intl)
 To enable it temporarily:
