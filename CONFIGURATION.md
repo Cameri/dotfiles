@@ -87,3 +87,7 @@ Link ranger config files
 ## VS Code
 Fix max user watches warning for big projects:
 * `$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+
+## Alsa
+To fix volume being too low, set sound card master volume using `alsamixer` and then store it with:
+* `# alsactl store`
