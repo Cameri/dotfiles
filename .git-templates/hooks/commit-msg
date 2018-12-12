@@ -1,0 +1,19 @@
+#!/bin/sh
+BRANCH=$(git branch | grep '*' | sed 's/* //')
+
+if [ "$BRANCH" = "dev" ] || [ "$BRANCH" = "master" ] || [ "$BRANCH" = "uat" ]
+then
+  echo "Current branch is ${BRANCH}. Leaving commit message as-is."
+else
+  SPRINT=$(echo "$BRANCH" | sed 's|[^/]*/\([^/]*\)/[^/]*|\1|' | sed 's|/.*||')
+  ISSUE=$(echo "$BRANCH" | sed 's|[^/]*/[^/]*/\([^/]*\)|\1|' | awk '{print toupper($0)}' | sed 's|/.*||')
+  DESC=$(echo "$BRANCH" | sed 's|[^/]*/[^/]*/[^/]*\(.*\)|\1|')
+  if [ "$DESC" = "" ]
+  then
+    # There's no issue
+    echo $(cat "$1")'\n\n'"Sprint: ${SPRINT}" > "$1"
+  else
+    # Prefix commit msg with issue
+    echo "$ISSUE"': '$(cat "$1")'\n\n'"Sprint: ${SPRINT}" > "$1"
+  fi
+fi
