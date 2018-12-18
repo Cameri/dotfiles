@@ -84,18 +84,21 @@ Create trash folder for `DD` hotkey and `:empty` console command
 Link ranger config files
 * `$ ln -s $DOTFILES/ranger $HOME/.config/`
 
-## VS Code
+## VS Code (Linux)
 Fix max user watches warning for big projects:
 * `$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
 
-## Alsa
-To fix volume being too low, set sound card master volume using `alsamixer` and then store it with:
-* `# alsactl store`
-
-## Allow more files handles to be opened system-wide and per process (Mac OS X)
+## VS Code (Mac OS X)
 ```
 $ echo kern.maxfiles=65536 | sudo tee -a /etc/sysctl.conf
 $ echo kern.maxfilesperproc=65536 | sudo tee -a /etc/sysctl.conf
 # sysctl -w kern.maxfiles=65536
 # sysctl -w kern.maxfilesperproc=65536
 ```
+
+Fix thin fonts after upgrading to Mac OS Mojave:
+* `$ defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`
+
+## Alsa
+To fix volume being too low, set sound card master volume using `alsamixer` and then store it with:
+* `# alsactl store`
