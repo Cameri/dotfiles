@@ -29,6 +29,14 @@ The GPG Agent is required for Telegram (citation needed).
 * `$ systemctl --user enable gpg-agent.service`
 * `$ systemctl --user start gpg-agent.service`
 
+## GPG (Mac OS X)
+* `$ brew install gpg`
+
+Add Keybase GPG key to local GPG agent:
+* `$ export GPG_TTY=$(tty)`
+* `$ keybase pgp export -s | gpg --allow-secret-key-import --import`
+* `$ gpg --list-secret-keys --keyid-format LONG`
+
 ## Awesome WM
 * `$ rm -rf ~/.config/awesome`
 * `$ ln -s $DOTFILES/awesome ~/.config/awesome`
@@ -60,7 +68,9 @@ Note: Ubuntu 16.04.4 LTS does not support Lain's fs widget. This widget must be 
 * Make `micro` the default editor for Git:
 * `$ git config --global core.editor "micro"`
 * Improve git log:
-* `git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"`
+* `$ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"`
+* `$ git config --global commit.gpgsign true`
+* `$ git config --global user.signingkey 8949679922214342`
 
 ## SSH Server
 Enable this to allow incoming remote connections.
@@ -102,3 +112,4 @@ Fix thin fonts after upgrading to Mac OS Mojave:
 ## Alsa
 To fix volume being too low, set sound card master volume using `alsamixer` and then store it with:
 * `# alsactl store`
+
