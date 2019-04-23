@@ -115,8 +115,10 @@ To fix volume being too low, set sound card master volume using `alsamixer` and 
 
 ## Redis (Mac OS X)
 After Redis is installed with Brew it may not start because there is a folder missing.
+
 To see the error:
 * `$ tail -f /usr/local/var/log/redis.log`
+
 To fix the error:
 * `# mkdir -p /usr/local/var/db/redis`
 * `# chown -R cameri /usr/local/var/db`
