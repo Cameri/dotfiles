@@ -64,13 +64,13 @@ Dotfiles
 * mopidy-spotify
 
 ## Installation
-See [INSTALLATION.md](INSTALLATION.md)
+See [INSTALLATION.md](https://github.com/Cameri/dotfiles/blob/master/INSTALLATION.md)
 
 ## Configuration
-See [CONFIGURATION.md](CONFIGURATION.md)
+See [CONFIGURATION.md](https://github.com/Cameri/dotfiles/blob/master/CONFIGURATION.md)
 
 ## Contributing
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) to learn about the process of submitting pull requests.
+Please read [CONTRIBUTING.md](https://github.com/Cameri/dotfiles/blob/master/CONTRIBUTING.md) to learn about the process of submitting pull requests.
 
 ## Authors
 
@@ -78,7 +78,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) to learn about the process of sub
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Cameri/dotfiles/blob/master/LICENSE.md) file for details
 
 ## Acknowledgments
 
