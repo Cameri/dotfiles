@@ -1,7 +1,4 @@
-# Installation instructions
-
-## Services
-TODO
+# Linux Installation
 
 ## Utilities
 
@@ -35,3 +32,41 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
 * `$ git clone git@github.com:JoelRSimpson/g13.git`
 * `$ cd g13 && make`
 * `# cp ../g13 /opt -r`
+
+# Mac OS X Installation
+
+## Utilities
+* iTerm2
+* Docker desktop
+  * Download and install Docker desktop from Docker hub
+* oh-my-zsh
+  * Run script from oh-my-zsh repository
+  * Change user shell to zsh
+  * `$ chsh $(whoami) $(which zsh)`
+* micro
+  * `$ brew install micro`
+* exa
+  * `$ brew install exa`
+* htop
+  * `$ brew install htop`
+* fzf
+  * `$ brew install fzf`
+  * Follow instructions if needed
+* node version manager (nvm)
+  * `$ brew install nvm`
+* AWS command line tools
+  * `$ brew install awscli`
+* Docker Compose
+  * `$ brew install docker-compose`
+* Adobe Acrobat Reader
+  * Download and install from Adobe's website
+* GPG Tools
+* LastPass
+* Keka
+
+## Productivity applications
+* DBeaver
+* Visual Studio Code
+* GitKraken
+* Postman
+* Portainer
