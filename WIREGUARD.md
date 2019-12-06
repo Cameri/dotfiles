@@ -4,11 +4,11 @@
 
 ### Configure hostname (Optional)
 ```sh
-sudo tee -a /etc/hosts <<EOF > /dev/null
-127.0.0.1 wg wg.local
-::1 wg wg.local
-EOF
 hostname="wg.local"
+sudo tee -a /etc/hosts <<EOF > /dev/null
+127.0.0.1 $hostname
+::1 $hostname
+EOF
 sudo hostnamectl set-hostname $hostname
 ```
 
