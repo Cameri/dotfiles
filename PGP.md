@@ -1,31 +1,49 @@
 # PGP
 
-**Warning:** Create keys only on trusted machines.
+## Set the home for your GPG configuration
+Add `export GNUPGHOME=$HOME/.gnupg` to your `.bashrc` or `.zshrc` file.
 
-## Creating a key pair
+## Harden your local GPG configuration
 
-### Dependencies
-- Keybase
-- GnuPG2
+Edit `~/.gnupg/gpg.conf` and ensure it has the following contents:
 
 ```sh
-$ brew install gpg
-$ brew cask install keybase
+tee $HOME/.gnupg/gpg.conf <<<EOF > /dev/null
+personal-cipher-preferences AES256 AES192 AES
+personal-digest-preferences SHA512 SHA384 SHA256
+personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
+default-preference-list SHA512 SHA384 SHA256 AES256 AES192 AES ZLIB BZIP2 ZIP Uncompressed
+cert-digest-algo SHA512
+s2k-digest-algo SHA512
+s2k-cipher-algo AES256
+charset utf-8
+fixed-list-mode
+no-comments
+no-emit-version
+keyid-format LONG
+list-options show-uid-validity
+verify-options show-uid-validity
+with-fingerprint
+require-cross-certification
+no-symkey-cache
+throw-keyids
+use-agent
+EOF
 ```
 
-### List existing secret keys
-`$ gpg -K`
-or, alternatively:
-`$ gpg --list-secret-keys`
+## Creating a PGP key pair with Keybase
 
-### GPG key pair creation
+### PGP key pair creation
 
 You will need to provide a passphrase for your key. A secure passphrase can be generated using:
 
-`$ gpg --gen-random -a 0 24`
+`$ gpg --gen-random --armor 0 24`
 
+This passphrase will need to be provided in the future when using the key. You should store this securely in a convenient place (e.g. password manager).
 
 #### With Keybase
+
+Create an account on Keybase.
 
 Ensure you are logged in. Execute the following and follow the prompts:
 
@@ -50,16 +68,125 @@ When exporting to the GnuPG keychain, encrypt private keys with a passphrase? [Y
 ▶ INFO Exported new key to the local GPG keychain
 ```
 
+A master key (with ID 13C4248EDC4E2AE6) with signing (S) and certificate (C) creation capabilities has been created.
+A secret sub-key (with ID 9BD6D3AC729A5E99, not shown above) belonging to the former master key is also created with encryption (E) capabilities.
+The master key and subkeys do not have authentication capability. An authentication subkey should be created for each secure device, which we will do at a later step. Do not reuse authentication subkeys between devices.
 
+Verify that the PGP key is active on Keybase:
 
-The newly created secret key 
+`$ keybase pgp list`
 
-**Note:** A master key with signing (S) and certificate (C) creation capabilities is created.
-A secret sub-key belonging to the former master key is also created with encryption (E) capabilities.
-A secret sub-key with authentication capability is NOT created in this step.
+```
+Keybase Key ID:  01017b15cebdd61be6e6e1d9337c15df89bd55817e4e5c2405013740d2a138dd2ecc0a
+PGP Fingerprint: b41efc96f041800732483b5613c4248edc4e2ae6
+PGP Identities:
+   John Doe <john.doe@contoso.com>
+```
 
+Verify that the secret key is in your local GPG keychain:
 
+`$ gpg --list-secret-keys`
+or, alternatively:
+`$ gpg -K`
+
+```
+/Users/youruser/.gnupg/pubring.kbx
+---------------------------------------
+sec   rsa4096/13C4248EDC4E2AE6 2019-12-19 [SC] [expires: 2035-12-15]
+      B41EFC96F041800732483B5613C4248EDC4E2AE6
+uid                 [ unknown] John Doe <john.doe@contoso.com>
+ssb   rsa4096/9BD6D3AC729A5E99 2019-12-19 [E] [expires: 2035-12-15]
+```
+
+Disable expiration on the master secret key (optional):
+
+`$ gpg --edit-key 13C4248EDC4E2AE6`
+
+```
+gpg (GnuPG/MacGPG2) 2.2.17; Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/13C4248EDC4E2AE6
+     created: 2019-12-19  expires: never       usage: SC
+     trust: unknown       validity: unknown
+ssb  rsa4096/9BD6D3AC729A5E99
+     created: 2019-12-19  expires: 2035-12-15  usage: E
+[ unknown] (1). John Doe <john.doe@contoso.com>
+
+gpg> expire
+Changing expiration time for the primary key.
+Please specify how long the key should be valid.
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+Key is valid for? (0) 0
+Key does not expire at all
+Is this correct? (y/N) y
+
+sec  rsa4096/13C4248EDC4E2AE6
+     created: 2019-12-19  expires: never       usage: SC
+     trust: unknown       validity: unknown
+ssb  rsa4096/9BD6D3AC729A5E99
+     created: 2019-12-19  expires: 2035-12-15  usage: E
+[ unknown] (1). John Doe <john.doe@contoso.com>
+
+gpg> save
+```
 
 #### Without keybase:
 *TODO*
 
+### Importing PGP key in another host
+
+#### With Keybase
+
+Ensure you are logged into keybase on the other host. Run the following and follow the prompts:
+
+`$ keybase login`
+
+List all the keys stored on your Keybase account:
+
+`$ keybase pgp list`
+
+```
+Keybase Key ID:  01017b15cebdd61be6e6e1d9337c15df89bd55817e4e5c2405013740d2a138dd2ecc0a
+PGP Fingerprint: b41efc96f041800732483b5613c4248edc4e2ae6
+PGP Identities:
+   John Doe <john.doe@contoso.com>
+```
+
+Store the Keybase key ID for the next commands:
+
+```sh
+KEYBASE_KEY_ID=01017b15cebdd61be6e6e1d9337c15df89bd55817e4e5c2405013740d2a138dd2ecc0a
+```
+
+Import the public key into your GPG keychain:
+
+`$ keybase pgp export -q $KEYBASE_KEY_ID | gpg --import`
+
+```
+gpg: key 13C4248EDC4E2AE6: "John Doe <john.doe@contoso.com>" imported
+gpg: Total number processed: 1
+```
+
+Import the private key into your GPG keychain:
+
+`$ keybase pgp export -q $KEYBASE_KEY_ID --secret | gpg --import --allow-secret-key-import`
+
+```
+gpg: key 13C4248EDC4E2AE6: "John Doe <john.doe@contoso.com>" 1 new signature
+gpg: key 13C4248EDC4E2AE6: secret key imported
+gpg: Total number processed: 1
+gpg:         new signatures: 1
+gpg:       secret keys read: 1
+```
+
+Verify that the private key was imported:
+
+`$ gpg --list-secret-keys`
