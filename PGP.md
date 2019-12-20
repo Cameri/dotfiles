@@ -5,10 +5,14 @@ Add `export GNUPGHOME=$HOME/.gnupg` to your `.bashrc` or `.zshrc` file.
 
 ## Harden your local GPG configuration
 
+Backup `~/.gnupg/gpg.conf` first if you have one.
+
+`$ cp ~/.gnupg/gpg.conf ~/.gnupg/gpg.backup.conf`
+
 Edit `~/.gnupg/gpg.conf` and ensure it has the following contents:
 
 ```sh
-tee $HOME/.gnupg/gpg.conf <<<EOF > /dev/null
+$ tee $HOME/.gnupg/gpg.conf <<<EOF > /dev/null
 personal-cipher-preferences AES256 AES192 AES
 personal-digest-preferences SHA512 SHA384 SHA256
 personal-compress-preferences ZLIB BZIP2 ZIP Uncompressed
