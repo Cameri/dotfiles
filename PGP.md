@@ -194,3 +194,55 @@ gpg:       secret keys read: 1
 Verify that the private key was imported:
 
 `$ gpg --list-secret-keys`
+
+## Using a Yubikey for SSH authentication
+
+You must add an authentication subkey for each Yubikey you plan to use.
+
+#### WARNING
+```
+This is a destructive operation.
+Transfering your GPG keys to the CCD module of your Yubikey, or any other smartcard,
+will convert the GPG key stored on your GPG keychain to a stub which won't allow you
+to transfer the key to any more Yubikeys or smartcards.
+```
+
+List your secret keys:
+
+`$ gpg --list-secret-keys`
+
+```
+/Users/youruser/.gnupg/pubring.kbx
+---------------------------------------
+sec   rsa4096/13C4248EDC4E2AE6 2019-12-19 [SC]
+      Key fingerprint = B41E FC96 F041 8007 3248  3B56 13C4 248E DC4E 2AE6
+uid                 [ unknown] John Doe <john.doe@contoso.com>
+ssb   rsa4096/9BD6D3AC729A5E99 2019-12-19 [E] [expires: 2035-12-15]
+```
+
+Open your key for editing:
+
+`$ gpg --expert --edit-key 13C4248EDC4E2AE6`
+
+```
+gpg (GnuPG/MacGPG2) 2.2.17; Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa4096/13C4248EDC4E2AE6
+     created: 2019-12-19  expires: never       usage: SC
+     trust: unknown       validity: unknown
+ssb  rsa4096/9BD6D3AC729A5E99
+     created: 2019-12-19  expires: 2035-12-15  usage: E
+[ unknown] (1). John Doe <john.doe@contoso.com>
+
+gpg>
+```
+
+No secret subkeys with authentication capability are present in the previous example. Secret subkeys end with `usage: A`. The `A` means Authentication. We must add one.
+
+### Adding an authentication subkey to your GPG keypair
+
+TODO
