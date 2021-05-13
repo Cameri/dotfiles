@@ -39,6 +39,8 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
 * iTerm2
 * Docker desktop
   * Download and install Docker desktop from Docker hub
+* zsh
+  * `brew install zsh` 
 * oh-my-zsh
   * Run script from oh-my-zsh repository
   * Change user shell to zsh
@@ -61,12 +63,13 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
 * Adobe Acrobat Reader
   * Download and install from Adobe's website
 * GPG Tools
-* LastPass
-* Keka
+* BitWarden
+* [Displayplacer](https://github.com/jakehilborn/displayplacer)
 
 ## Productivity applications
+* PyCharm
 * DBeaver
-* Visual Studio Code
+* Visual Studio Code - Insiders
 * GitKraken
 * Postman
 * Portainer
