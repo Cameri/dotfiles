@@ -62,6 +62,9 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
   * `$ brew install docker-compose`
 * Adobe Acrobat Reader
   * Download and install from Adobe's website
+* OpenVPN
+  * `brew install openvpn`
+* WireGuard
 * GPG Tools
 * BitWarden
 * [Displayplacer](https://github.com/jakehilborn/displayplacer)
