@@ -45,6 +45,9 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
   * Run script from oh-my-zsh repository
   * Change user shell to zsh
   * `$ chsh $(whoami) $(which zsh)`
+  * Instll antigen
+    * `mkdir -p ~/.antigen`
+    * `curl -L git.io/antigen > antigen.zsh`
 * micro
   * `$ brew install micro`
 * exa
@@ -65,7 +68,10 @@ Note: ~/.win32 and ~/.win64 will be your equivalent `C:\` drives in Win
 * OpenVPN
   * `brew install openvpn`
 * WireGuard
+  * `brew install wireguard-tools`
 * GPG Tools
+* GPG
+  * `brew install gpg`
 * BitWarden
 * [Displayplacer](https://github.com/jakehilborn/displayplacer)
 
